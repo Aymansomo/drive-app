@@ -1,10 +1,68 @@
-const { app, BrowserWindow, Menu, protocol } = require('electron');
+const { app, BrowserWindow, Menu, protocol, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { autoUpdater } = require('electron-updater');
 const isDev = !app.isPackaged;
 
 // Global reference to the window object
 let mainWindow;
+
+// Configure auto-updater
+if (!isDev) {
+  autoUpdater.autoDownload = false;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  // Handle auto-updater events
+  autoUpdater.on('checking-for-update', () => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-status', 'Checking for updates...');
+    }
+  });
+
+  autoUpdater.on('update-available', (info) => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-status', 'Update available. Downloading...');
+      autoUpdater.downloadUpdate();
+    }
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-status', 'No updates available.');
+    }
+  });
+
+  autoUpdater.on('error', (err) => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-status', 'Error in auto-updater: ' + err);
+    }
+  });
+
+  autoUpdater.on('download-progress', (progressObj) => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-progress', progressObj);
+    }
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update-status', 'Update downloaded. It will be installed on next restart.');
+    }
+  });
+}
+
+// IPC handlers for update control
+ipcMain.on('check-for-updates', () => {
+  if (!isDev) {
+    autoUpdater.checkForUpdates();
+  }
+});
+
+ipcMain.on('install-update', () => {
+  if (!isDev) {
+    autoUpdater.quitAndInstall();
+  }
+});
 
 // Get the correct path to the shared directory
 function getSharedPath() {
@@ -94,6 +152,8 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+    // Check for updates when app starts
+    autoUpdater.checkForUpdates();
   }
 
   setupMainMenu();

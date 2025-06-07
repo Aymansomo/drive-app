@@ -1,7 +1,7 @@
 {
   "name": "admin-app",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -19,8 +19,13 @@
     "productName": "Driving Test App",
     "asar": true,
     "asarUnpack": [
-    "shared/**"
+      "shared/**"
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "Ayman_WebWorks",
+      "repo": "drive-app"
+    },
     "directories": {
       "output": "dist-electron"
     },
@@ -40,7 +45,9 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["ia32"]
+          "arch": [
+            "ia32"
+          ]
         }
       ],
       "icon": "public/icon.ico",
@@ -50,6 +57,7 @@
     }
   },
   "dependencies": {
+    "electron-updater": "^6.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

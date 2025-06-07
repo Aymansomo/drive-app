@@ -15,6 +15,7 @@ import TextInputModalLessonMahwar from './components/modals/TextInputModalLesson
 import ConfirmModal from './components/modals/ConfirmModal'
 import QuestionPreview from './components/media/QuestionPreview'
 import LessonCategoryManager from './components/lesson/LessonCategoryManager'
+import UpdateNotification from './components/ui/UpdateNotification'
 
 // Node.js modules for Electron
 const fs = window.require ? window.require('fs') : null;
@@ -3322,6 +3323,13 @@ function App() {
 
   // If we get here, something went wrong with role selection
   return <div>Error: Invalid role selected</div>;
+
+  return (
+    <div className="app">
+      {/* ... existing components ... */}
+      <UpdateNotification />
+    </div>
+  );
 }
 
 export default App;

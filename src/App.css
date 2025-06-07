@@ -3415,3 +3415,71 @@ body {
 .close-button:hover {
   background-color: #d32f2f;
 }
+
+.update-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.update-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.update-content h3 {
+  margin: 0;
+  color: #333;
+}
+
+.update-content p {
+  margin: 0;
+  color: #666;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.3s ease;
+}
+
+.progress-bar span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.update-content button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.update-content button:hover {
+  background: #45a049;
+}
