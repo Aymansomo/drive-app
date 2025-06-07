@@ -1,7 +1,7 @@
 {
   "name": "admin-app",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,7 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "Ayman_WebWorks",
+      "owner": "Aymansomo",
       "repo": "drive-app"
     },
     "directories": {
