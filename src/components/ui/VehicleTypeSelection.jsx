@@ -12,7 +12,7 @@ function VehicleTypeSelection({ onSelect, vehicleTypeVisibility }) {
   
     return (
       <div className="vehicle-type-selection">
-        <h1>اختر نوع المركبة</h1>
+        <h1>اختر نوع المركبة v1.0.2</h1>
         <div className="vehicle-types-grid">
           {vehicleTypes
             .filter(type => vehicleTypeVisibility[type.id])

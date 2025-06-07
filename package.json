@@ -1,7 +1,7 @@
 {
   "name": "admin-app",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -54,12 +54,19 @@
       "signingHashAlgorithms": null,
       "signAndEditExecutable": false,
       "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Driving Test App"
     }
   },
   "dependencies": {
-    "electron-updater": "^6.6.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "electron-updater": "^6.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
